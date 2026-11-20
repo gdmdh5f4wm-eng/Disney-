@@ -1,0 +1,36 @@
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+
+const AuthenticationInfo = ({ isSignin }) => {
+	return (
+		<InfoText>
+			{isSignin ? 'Nuovo su Disney+?' : 'Hai già un account?'}
+			<Link to={`${isSignin ? '/signup' : '/signin'}`}>
+				<span>{isSignin ? 'Registrati ora' : 'Accedi'}</span>
+			</Link>
+		</InfoText>
+	)
+}
+
+AuthenticationInfo.propTypes = {
+	isSignin: PropTypes.bool,
+}
+
+export default AuthenticationInfo
+
+const InfoText = styled.p`
+	color: rgba(255, 255, 255, 0.7);
+	padding: 5px;
+	font-size: 13px;
+
+	span {
+		color: white;
+		margin-left: 5px;
+		font-weight: bold;
+	}
+
+	@media (min-width: 1000px) {
+		font-size: 15px;
+	}
+`

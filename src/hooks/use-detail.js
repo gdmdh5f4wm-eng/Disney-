@@ -1,0 +1,41 @@
+import { useDispatch, useSelector } from 'react-redux'
+import { watchListActions } from '@store/slices/watchlist-slice'
+
+const useDetail = ({ type, id, data }) => {
+	const dispatch = useDispatch()
+	const userId = useSelector(state => state.user.user?.uid)
+	const watchList = useSelector(state => state.watchList.resources)
+	const isAddedToWatchList = Boolean(userId && watchList.find(item => item.detailsId === id && item.userId === userId))
+
+	let resourceType = ''
+
+	if (type === 'movie') {
+		resourceType = 'movie'
+	} else if (type === 'tv') {
+		resourceType = 'series'
+	}
+
+	const addToWatchListHandler = () => {
+		if (!userId || !data) {
+			return
+		}
+
+		dispatch(
+			watchListActions.addResourceToList({
+				userId,
+				id,
+				type: resourceType,
+				path: data.posterPath,
+				title: data.title,
+			})
+		)
+	}
+
+	const removeFromWatchListHandler = () => {
+		dispatch(watchListActions.removeResourceFromList(id))
+	}
+
+	return { isAddedToWatchList, addToWatchListHandler, removeFromWatchListHandler }
+}
+
+export default useDetail

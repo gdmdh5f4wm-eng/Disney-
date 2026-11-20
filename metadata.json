@@ -1,0 +1,6 @@
+{
+  "name": "Disney+ | Clone App",
+  "description": "Disney+ streaming web application clone built with React, Redux Toolkit, and Firebase.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
